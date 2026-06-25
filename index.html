@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Bubu 🎀</title>
+  <meta name="description" content="A magical birthday surprise from Haroon to Zainab — Happy Birthday Bubu! 💖" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Dancing+Script:wght@400;600;700&family=Quicksand:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ===================== CURSOR HEARTS ===================== -->
+<div id="cursor-heart" class="cursor-heart">💗</div>
+
+<!-- ===================== MUSIC TOGGLE ===================== -->
+<button id="music-toggle" class="music-toggle" title="Toggle Music">
+  🎵
+</button>
+
+<!-- ===================== PAGE 1: PASSCODE ===================== -->
+<div id="page-passcode" class="page page-active">
+  <!-- Floating bears background -->
+  <div class="floating-bears-bg" id="bg-bears-1"></div>
+
+  <!-- Particles -->
+  <div class="particles" id="particles-1"></div>
+
+  <!-- Corner bears -->
+  <div class="corner-bear tl">🐻</div>
+  <div class="corner-bear tr">🐻</div>
+  <div class="corner-bear bl">🐻</div>
+  <div class="corner-bear br">🐻</div>
+
+  <!-- Main card -->
+  <div class="passcode-card">
+    <div class="bear-row">
+      <span class="big-bear animate-bounce-slow">🐻</span>
+      <span class="big-bear white-bear animate-bounce-slow delay-1">🐻‍❄️</span>
+      <span class="big-bear animate-bounce-slow delay-2">🐻</span>
+    </div>
+
+    <h1 class="hello-title">Hello Bubu ❤️</h1>
+    <p class="subtitle">Enter our secret code to unlock your birthday surprise.</p>
+
+    <div class="input-row">
+      <div class="input-boxes" id="input-boxes">
+        <input class="digit-box" id="d1" type="tel" maxlength="1" />
+        <input class="digit-box" id="d2" type="tel" maxlength="1" />
+        <input class="digit-box" id="d3" type="tel" maxlength="1" />
+        <input class="digit-box" id="d4" type="tel" maxlength="1" />
+      </div>
+    </div>
+
+    <p id="passcode-error" class="passcode-error hidden">Wrong code 💔 Try again!</p>
+
+    <button class="heart-btn" id="unlock-btn" onclick="checkPasscode()">
+      <span class="btn-icon">💕</span>
+      Unlock My Surprise
+      <span class="btn-icon">💕</span>
+    </button>
+
+    <p class="hint-text">Psst… the code is a special date 🗓️</p>
+  </div>
+
+  <!-- Explosion overlay -->
+  <div id="explosion" class="explosion hidden"></div>
+</div>
+
+
+<!-- ===================== PAGE 2: BIRTHDAY ===================== -->
+<div id="page-birthday" class="page">
+  <div class="floating-bears-bg" id="bg-bears-2"></div>
+  <div class="particles" id="particles-2"></div>
+  <div class="confetti-container" id="confetti-1"></div>
+
+  <!-- Clouds -->
+  <div class="cloud cloud-1">☁️</div>
+  <div class="cloud cloud-2">☁️</div>
+  <div class="cloud cloud-3">☁️</div>
+
+  <!-- Rotating text ring -->
+  <div class="scene-center">
+    <div class="rotating-text-container">
+      <svg class="rotating-svg" viewBox="0 0 400 400" id="rotating-svg">
+        <defs>
+          <path id="circlePath" d="M 200,200 m -150,0 a 150,150 0 1,1 300,0 a 150,150 0 1,1 -300,0" />
+        </defs>
+        <text class="circle-text">
+          <textPath href="#circlePath" startOffset="0%">
+            ✨ Happy Birthday Bubu ❤️ ✨ Happy Birthday Bubu ❤️ ✨ Happy Birthday Bubu ❤️
+          </textPath>
+        </text>
+      </svg>
+
+      <!-- Center bear -->
+      <div class="center-dudu" id="dudu-bear">
+        <div class="balloon-wrap">
+          <div class="balloon">🎈</div>
+          <div class="balloon-string"></div>
+        </div>
+        <div class="dudu-emoji">🐻</div>
+        <div class="cake-wrap">🎂</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page2-bottom">
+    <button class="next-btn" onclick="goToPage('page-diary')">
+      <span class="btn-bear">🐻‍❄️</span>
+      Next ❤️
+      <span class="btn-bear">🐻‍❄️</span>
+    </button>
+  </div>
+</div>
+
+
+<!-- ===================== PAGE 3: DIARY ===================== -->
+<div id="page-diary" class="page">
+  <div class="floating-bears-bg" id="bg-bears-3"></div>
+  <div class="particles" id="particles-3"></div>
+  <div class="confetti-container" id="confetti-2"></div>
+
+  <!-- Falling petals -->
+  <div class="petals-container" id="petals"></div>
+
+  <!-- Corner sitting bears -->
+  <div class="diary-bear diary-bear-tl">🐻‍❄️</div>
+  <div class="diary-bear diary-bear-tr">🐻</div>
+  <div class="diary-bear diary-bear-bl">🐻</div>
+  <div class="diary-bear diary-bear-br">🐻‍❄️</div>
+
+  <!-- Diary -->
+  <div class="diary-wrapper">
+    <div class="diary-peeking-bears">
+      <span class="peek-bear-left">🐻‍❄️</span>
+      <span class="peek-bear-right">🐻</span>
+    </div>
+
+    <div class="diary-book" id="diary-book">
+      <div class="diary-cover" id="diary-cover">
+        <div class="diary-cover-content">
+          <div class="diary-lock">🔓</div>
+          <h2 class="diary-cover-title">My Birthday Diary</h2>
+          <p class="diary-cover-sub">For Bubu 💖</p>
+          <div class="diary-ribbon">🎀</div>
+        </div>
+      </div>
+
+      <div class="diary-pages" id="diary-pages">
+        <div class="diary-left-page">
+          <div class="page-decoration">
+            <span>🌸</span><span>💕</span><span>✨</span>
+          </div>
+          <img src="" alt="" class="diary-doodle" id="diary-doodle" />
+          <div class="diary-stickers">
+            <span class="sticker sticker-1">🐻</span>
+            <span class="sticker sticker-2">💖</span>
+            <span class="sticker sticker-3">🌸</span>
+            <span class="sticker sticker-4">🐻‍❄️</span>
+            <span class="sticker sticker-5">⭐</span>
+          </div>
+        </div>
+
+        <div class="diary-right-page">
+          <div class="page-lines">
+            <h2 class="diary-heading">Dear Bubu ❤️</h2>
+            <div class="typewriter-text" id="typewriter-text"></div>
+            <p class="diary-signature" id="diary-sig">— Forever your Pookie ❤️</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="diary-bottom">
+    <button class="next-btn" onclick="goToPage('page-reasons')">
+      <span class="btn-bear">🐻</span>
+      Next ❤️
+      <span class="btn-bear">🐻‍❄️</span>
+    </button>
+  </div>
+</div>
+
+<!-- ===================== PAGE 4: LOVE REASONS ===================== -->
+<div id="page-reasons" class="page">
+  <div class="floating-bears-bg" id="bg-bears-4"></div>
+  <div class="particles" id="particles-4"></div>
+  <div class="confetti-container" id="confetti-3"></div>
+
+  <div class="reasons-wrapper">
+    <div class="reasons-header">
+      <span class="reasons-bear">🐻‍❄️</span>
+      <h2 class="reasons-title">Reasons I Love You</h2>
+      <span class="reasons-bear">🐻</span>
+    </div>
+
+    <div class="reasons-card-area">
+      <button class="reasons-arrow reasons-prev" id="reasons-prev" onclick="changeReason(-1)">❮</button>
+
+      <div class="reasons-card" id="reasons-card">
+        <div class="reasons-card-inner" id="reasons-card-inner">
+          <div class="reason-number" id="reason-number">#1</div>
+          <div class="reason-icon" id="reason-icon">💖</div>
+          <p class="reason-text" id="reason-text"></p>
+        </div>
+      </div>
+
+      <button class="reasons-arrow reasons-next" id="reasons-next" onclick="changeReason(1)">❯</button>
+    </div>
+
+    <div class="reasons-progress">
+      <div class="reasons-dots" id="reasons-dots"></div>
+      <p class="reasons-counter" id="reasons-counter">1 of 20</p>
+    </div>
+  </div>
+
+  <div class="page-nav-bottom">
+    <button class="next-btn" onclick="goToPage('page-timers')">
+      <span class="btn-bear">🐻</span>
+      Next ❤️
+      <span class="btn-bear">🐻‍❄️</span>
+    </button>
+  </div>
+</div>
+
+
+<!-- ===================== PAGE 5: COUNTDOWN TIMERS ===================== -->
+<div id="page-timers" class="page">
+  <div class="floating-bears-bg" id="bg-bears-5"></div>
+  <div class="particles" id="particles-5"></div>
+
+  <div class="timers-wrapper">
+    <div class="timers-header">
+      <span>🐻‍❄️</span>
+      <h2 class="timers-title">Our Special Moments ❤️</h2>
+      <span>🐻</span>
+    </div>
+
+    <!-- Timer 1: First Text -->
+    <div class="timer-card timer-card-1">
+      <div class="timer-card-top">
+        <span class="timer-emoji">💬</span>
+        <div>
+          <h3 class="timer-label">First Text</h3>
+          <p class="timer-date">October 5, 2025 • 11:54 AM</p>
+        </div>
+        <span class="timer-emoji">✨</span>
+      </div>
+      <div class="timer-display" id="timer1-display">
+        <div class="timer-unit">
+          <span class="timer-num" id="t1-days">000</span>
+          <span class="timer-unit-label">Days</span>
+        </div>
+        <div class="timer-colon">♥</div>
+        <div class="timer-unit">
+          <span class="timer-num" id="t1-hours">00</span>
+          <span class="timer-unit-label">Hours</span>
+        </div>
+        <div class="timer-colon">♥</div>
+        <div class="timer-unit">
+          <span class="timer-num" id="t1-mins">00</span>
+          <span class="timer-unit-label">Mins</span>
+        </div>
+        <div class="timer-colon">♥</div>
+        <div class="timer-unit">
+          <span class="timer-num" id="t1-secs">00</span>
+          <span class="timer-unit-label">Secs</span>
+        </div>
+      </div>
+      <p class="timer-caption">“The moment everything started 🤍”</p>
+    </div>
+
+    <!-- Timer 2: Started Dating -->
+    <div class="timer-card timer-card-2">
+      <div class="timer-card-top">
+        <span class="timer-emoji">👑</span>
+        <div>
+          <h3 class="timer-label">We Started Dating</h3>
+          <p class="timer-date">January 16, 2026 • 10:36 AM</p>
+        </div>
+        <span class="timer-emoji">💞</span>
+      </div>
+      <div class="timer-display" id="timer2-display">
+        <div class="timer-unit">
+          <span class="timer-num" id="t2-days">000</span>
+          <span class="timer-unit-label">Days</span>
+        </div>
+        <div class="timer-colon">♥</div>
+        <div class="timer-unit">
+          <span class="timer-num" id="t2-hours">00</span>
+          <span class="timer-unit-label">Hours</span>
+        </div>
+        <div class="timer-colon">♥</div>
+        <div class="timer-unit">
+          <span class="timer-num" id="t2-mins">00</span>
+          <span class="timer-unit-label">Mins</span>
+        </div>
+        <div class="timer-colon">♥</div>
+        <div class="timer-unit">
+          <span class="timer-num" id="t2-secs">00</span>
+          <span class="timer-unit-label">Secs</span>
+        </div>
+      </div>
+      <p class="timer-caption">“The day I became the luckiest 💜”</p>
+    </div>
+  </div>
+
+  <div class="page-nav-bottom">
+    <button class="next-btn" onclick="goToPage('page-dress')">
+      <span class="btn-bear">🐻</span>
+      Next ❤️
+      <span class="btn-bear">🐻‍❄️</span>
+    </button>
+  </div>
+</div>
+
+
+<!-- ===================== PAGE 6: BEAR DRESS-UP ===================== -->
+<div id="page-dress" class="page">
+  <div class="floating-bears-bg" id="bg-bears-6"></div>
+  <div class="particles" id="particles-6"></div>
+
+  <div class="dress-wrapper">
+    <div class="dress-header">
+      <span>🎁</span>
+      <h2 class="dress-title">Dress Up Our Bears! 🐻🐻‍❄️</h2>
+      <span>🎁</span>
+    </div>
+
+    <div class="dress-stage">
+      <!-- Dudu Bear -->
+      <div class="dress-station">
+        <p class="bear-name">Dudu 🐻</p>
+        <div class="bear-costume-display" id="dudu-display">
+          <div class="costume-slot slot-hat"   id="dudu-hat"></div>
+          <div class="costume-slot slot-face"  id="dudu-face"></div>
+          <div class="bear-body">🐻</div>
+          <div class="costume-slot slot-neck"  id="dudu-neck"></div>
+          <div class="costume-slot slot-hand"  id="dudu-hand"></div>
+        </div>
+        <div class="acc-palette" id="dudu-palette">
+          <button class="acc-btn" data-bear="dudu" data-slot="hat"  data-emoji="💯" title="Birthday Hat" onclick="toggleCostume(this)">🎉</button>
+          <button class="acc-btn" data-bear="dudu" data-slot="hat"  data-emoji="👑" title="Crown" onclick="toggleCostume(this)">👑</button>
+          <button class="acc-btn" data-bear="dudu" data-slot="hat"  data-emoji="🎩" title="Top Hat" onclick="toggleCostume(this)">🎩</button>
+          <button class="acc-btn" data-bear="dudu" data-slot="face" data-emoji="🕶️" title="Sunglasses" onclick="toggleCostume(this)">🕶️</button>
+          <button class="acc-btn" data-bear="dudu" data-slot="neck" data-emoji="🎀" title="Bow" onclick="toggleCostume(this)">🎀</button>
+          <button class="acc-btn" data-bear="dudu" data-slot="neck" data-emoji="🧹" title="Scarf" onclick="toggleCostume(this)">🧹</button>
+          <button class="acc-btn" data-bear="dudu" data-slot="hand" data-emoji="🌹" title="Rose" onclick="toggleCostume(this)">🌹</button>
+          <button class="acc-btn" data-bear="dudu" data-slot="hand" data-emoji="🎂" title="Cake" onclick="toggleCostume(this)">🎂</button>
+          <button class="acc-btn acc-reset" onclick="resetBear('dudu')" title="Reset">❌</button>
+        </div>
+      </div>
+
+      <!-- Bubu Bear -->
+      <div class="dress-station">
+        <p class="bear-name">Bubu 🐻‍❄️</p>
+        <div class="bear-costume-display" id="bubu-display">
+          <div class="costume-slot slot-hat"  id="bubu-hat"></div>
+          <div class="costume-slot slot-face" id="bubu-face"></div>
+          <div class="bear-body">🐻‍❄️</div>
+          <div class="costume-slot slot-neck" id="bubu-neck"></div>
+          <div class="costume-slot slot-hand" id="bubu-hand"></div>
+        </div>
+        <div class="acc-palette" id="bubu-palette">
+          <button class="acc-btn" data-bear="bubu" data-slot="hat"  data-emoji="💝" title="Flower Crown" onclick="toggleCostume(this)">💝</button>
+          <button class="acc-btn" data-bear="bubu" data-slot="hat"  data-emoji="👑" title="Crown" onclick="toggleCostume(this)">👑</button>
+          <button class="acc-btn" data-bear="bubu" data-slot="hat"  data-emoji="🌟" title="Star" onclick="toggleCostume(this)">🌟</button>
+          <button class="acc-btn" data-bear="bubu" data-slot="face" data-emoji="💓" title="Heart Eyes" onclick="toggleCostume(this)">💓</button>
+          <button class="acc-btn" data-bear="bubu" data-slot="face" data-emoji="🕶️" title="Sunglasses" onclick="toggleCostume(this)">🕶️</button>
+          <button class="acc-btn" data-bear="bubu" data-slot="neck" data-emoji="💜" title="Heart Necklace" onclick="toggleCostume(this)">💜</button>
+          <button class="acc-btn" data-bear="bubu" data-slot="neck" data-emoji="🎀" title="Bow" onclick="toggleCostume(this)">🎀</button>
+          <button class="acc-btn" data-bear="bubu" data-slot="hand" data-emoji="🌷" title="Tulip" onclick="toggleCostume(this)">🌷</button>
+          <button class="acc-btn" data-bear="bubu" data-slot="hand" data-emoji="🧁" title="Cupcake" onclick="toggleCostume(this)">🧁</button>
+          <button class="acc-btn acc-reset" onclick="resetBear('bubu')" title="Reset">❌</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-nav-bottom">
+    <button class="next-btn" onclick="goToPage('page-passcode')">
+      <span class="btn-bear">🐻</span>
+      Start Over 💕
+      <span class="btn-bear">🐻‍❄️</span>
+    </button>
+  </div>
+</div>
+
+
+<!-- Audio element -->
+<audio id="bg-music" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg" />
+</audio>
+
+<script src="script.js"></script>
+</body>
+</html>

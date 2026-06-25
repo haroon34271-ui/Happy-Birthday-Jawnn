@@ -1,0 +1,1433 @@
+/* =====================================================
+   BUBU BIRTHDAY WEBSITE — style.css
+   ===================================================== */
+
+/* ---- RESET & BASE ---- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --pink-deep:    #f472b6;
+  --pink-mid:     #fb7eb8;
+  --pink-soft:    #fda4cf;
+  --pink-light:   #fce7f3;
+  --pink-pastel:  #fff0f8;
+  --blush:        #ffd6ec;
+  --cream:        #fff8f0;
+  --brown:        #a0522d;
+  --brown-light:  #d2956a;
+  --white:        #ffffff;
+  --text-dark:    #7c3f6e;
+  --text-mid:     #b05c8e;
+  --text-light:   #e89ec5;
+  --shadow-soft:  0 8px 40px rgba(244,114,182,0.25);
+  --shadow-card:  0 20px 60px rgba(244,114,182,0.3);
+  --radius-lg:    32px;
+  --radius-md:    20px;
+  --radius-sm:    12px;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Quicksand', sans-serif;
+  cursor: none;
+  user-select: none;
+}
+
+/* ---- CURSOR ---- */
+.cursor-heart {
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  font-size: 18px;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  transition: transform 0.05s ease;
+  animation: cursor-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes cursor-pulse {
+  0%, 100% { transform: translate(-50%,-50%) scale(1); }
+  50%       { transform: translate(-50%,-50%) scale(1.3); }
+}
+
+/* ---- PAGES ---- */
+.page {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+  overflow: hidden;
+}
+
+.page-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* =====================================================
+   PAGE 1 — PASSCODE
+   ===================================================== */
+#page-passcode {
+  background: linear-gradient(135deg,
+    #ffe4f0 0%,
+    #ffd6e7 25%,
+    #ffbde0 50%,
+    #ffd6ec 75%,
+    #ffe8f4 100%);
+  background-size: 400% 400%;
+  animation: bgShift 8s ease infinite;
+}
+
+@keyframes bgShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ---- Passcode card ---- */
+.passcode-card {
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 2px solid rgba(255,180,215,0.5);
+  border-radius: var(--radius-lg);
+  padding: 48px 40px;
+  max-width: 440px;
+  width: 90%;
+  text-align: center;
+  box-shadow: var(--shadow-card),
+              inset 0 1px 0 rgba(255,255,255,0.8);
+  position: relative;
+  z-index: 10;
+  animation: floatCard 4s ease-in-out infinite;
+}
+
+@keyframes floatCard {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+
+.bear-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.big-bear {
+  font-size: 40px;
+  display: inline-block;
+}
+
+.hello-title {
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(2rem, 6vw, 3rem);
+  color: var(--text-dark);
+  text-shadow: 0 2px 15px rgba(244,114,182,0.4);
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(1rem, 3vw, 1.25rem);
+  color: var(--text-mid);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+/* ---- Digit input ---- */
+.input-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.input-boxes {
+  display: flex;
+  gap: 14px;
+}
+
+.digit-box {
+  width: 58px;
+  height: 68px;
+  border-radius: 16px;
+  border: 2.5px solid rgba(244,114,182,0.5);
+  background: rgba(255,255,255,0.7);
+  font-family: 'Pacifico', cursive;
+  font-size: 1.8rem;
+  text-align: center;
+  color: var(--text-dark);
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(244,114,182,0.2);
+  caret-color: var(--pink-deep);
+}
+
+
+.digit-box:focus {
+  border-color: var(--pink-deep);
+  box-shadow: 0 4px 20px rgba(244,114,182,0.5),
+              0 0 0 3px rgba(244,114,182,0.15);
+  background: rgba(255,255,255,0.9);
+  transform: scale(1.05);
+}
+
+.passcode-error {
+  color: #e05480;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 14px;
+  animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-12px); }
+  40%       { transform: translateX(12px); }
+  60%       { transform: translateX(-8px); }
+  80%       { transform: translateX(8px); }
+}
+
+.shake { animation: shake 0.5s ease !important; }
+
+/* ---- Heart Button ---- */
+.heart-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #f472b6, #ec4899, #db2777);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 16px 36px;
+  font-family: 'Pacifico', cursive;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 8px 30px rgba(244,114,182,0.5);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: 18px;
+}
+
+.heart-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+  border-radius: inherit;
+}
+
+.heart-btn:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 14px 40px rgba(244,114,182,0.65);
+}
+
+.heart-btn:active {
+  transform: translateY(-2px) scale(0.99);
+}
+
+.btn-icon { font-size: 1.2rem; animation: heartPop 1.5s ease infinite; }
+
+@keyframes heartPop {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.3); }
+}
+
+.hint-text {
+  font-size: 0.82rem;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+/* ---- Corner bears ---- */
+.corner-bear {
+  position: absolute;
+  font-size: 2.5rem;
+  opacity: 0.5;
+  z-index: 5;
+  animation: bearWobble 3s ease-in-out infinite;
+}
+.corner-bear.tl { top: 20px;  left: 20px; }
+.corner-bear.tr { top: 20px;  right: 20px; animation-delay: 0.8s; }
+.corner-bear.bl { bottom: 20px; left: 20px;  animation-delay: 1.6s; }
+.corner-bear.br { bottom: 20px; right: 20px;  animation-delay: 0.4s; }
+
+@keyframes bearWobble {
+  0%, 100% { transform: rotate(-10deg) scale(1); }
+  50%       { transform: rotate(10deg) scale(1.1); }
+}
+
+/* ---- Explosion ---- */
+.explosion {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  overflow: hidden;
+}
+
+/* ---- Floating bears bg ---- */
+.floating-bears-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.float-bear {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.3;
+  animation: floatBear linear infinite;
+}
+
+@keyframes floatBear {
+  0%   { transform: translateY(110vh) rotate(-15deg); opacity: 0; }
+  10%  { opacity: 0.35; }
+  90%  { opacity: 0.35; }
+  100% { transform: translateY(-110vh) rotate(15deg); opacity: 0; }
+}
+
+/* ---- Particles ---- */
+.particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  pointer-events: none;
+  animation: particleFall linear infinite;
+  font-size: 1rem;
+}
+
+@keyframes particleFall {
+  0%   { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.8; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+/* ---- Animations shared ---- */
+.animate-bounce-slow {
+  display: inline-block;
+  animation: bounceSlow 2s ease-in-out infinite;
+}
+.delay-1 { animation-delay: 0.4s; }
+.delay-2 { animation-delay: 0.8s; }
+
+@keyframes bounceSlow {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50%       { transform: translateY(-15px) rotate(5deg); }
+}
+
+.hidden { display: none !important; }
+
+
+/* =====================================================
+   PAGE 2 — BIRTHDAY
+   ===================================================== */
+#page-birthday {
+  background: linear-gradient(180deg,
+    #ffe4f5 0%,
+    #ffd0eb 40%,
+    #ffc4e4 100%);
+}
+
+/* ---- Clouds ---- */
+.cloud {
+  position: absolute;
+  font-size: 3.5rem;
+  opacity: 0.45;
+  animation: cloudFloat linear infinite;
+}
+.cloud-1 { top: 8%;  left: -5%;  animation-duration: 28s; animation-delay: 0s; }
+.cloud-2 { top: 20%; right: -5%; animation-duration: 35s; animation-delay: -12s; font-size: 2.8rem; }
+.cloud-3 { bottom: 18%; left: 20%; animation-duration: 22s; animation-delay: -6s; font-size: 2rem; }
+
+@keyframes cloudFloat {
+  0%   { transform: translateX(-15vw); }
+  100% { transform: translateX(115vw); }
+}
+
+/* ---- Scene center ---- */
+.scene-center {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  margin-bottom: 20px;
+}
+
+/* ---- Rotating SVG text ---- */
+.rotating-text-container {
+  position: relative;
+  width: min(400px, 90vw);
+  height: min(400px, 90vw);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rotating-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: rotateSVG 18s linear infinite;
+}
+
+@keyframes rotateSVG { 100% { transform: rotate(360deg); } }
+
+.circle-text {
+  font-family: 'Dancing Script', cursive;
+  font-size: 18px;
+  fill: #c0437d;
+  letter-spacing: 3px;
+}
+
+/* ---- Dudu bear center ---- */
+.center-dudu {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: duduBounce 2s ease-in-out infinite;
+  z-index: 5;
+}
+
+@keyframes duduBounce {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-18px); }
+}
+
+.balloon-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: -8px;
+}
+
+.balloon {
+  font-size: clamp(2.5rem, 7vw, 4rem);
+  animation: balloonFloat 2.5s ease-in-out infinite;
+}
+
+@keyframes balloonFloat {
+  0%, 100% { transform: translateX(-8px) rotate(-8deg); }
+  50%       { transform: translateX(8px) rotate(8deg); }
+}
+
+.balloon-string {
+  width: 2px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--pink-soft), transparent);
+  opacity: 0.6;
+}
+
+.dudu-emoji {
+  font-size: clamp(4rem, 12vw, 7rem);
+  line-height: 1;
+  filter: drop-shadow(0 8px 20px rgba(244,114,182,0.4));
+}
+
+.cake-wrap {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  margin-top: -8px;
+  animation: cakeWiggle 3s ease-in-out infinite;
+}
+
+@keyframes cakeWiggle {
+  0%, 100% { transform: rotate(-5deg); }
+  50%       { transform: rotate(5deg); }
+}
+
+/* ---- Page2 Bottom ---- */
+.page2-bottom {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+/* ---- Next button ---- */
+.next-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #f9a8d4, #f472b6, #ec4899);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 14px 36px;
+  font-family: 'Pacifico', cursive;
+  font-size: 1.05rem;
+  cursor: pointer;
+  box-shadow: 0 8px 28px rgba(244,114,182,0.45);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.next-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.25), transparent);
+}
+
+.next-btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 16px 40px rgba(244,114,182,0.6);
+}
+
+.btn-bear { font-size: 1.2rem; }
+
+/* ---- Confetti ---- */
+.confetti-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -20px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  animation: confettiFall linear infinite;
+}
+
+@keyframes confettiFall {
+  0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(105vh) rotate(720deg); opacity: 0.3; }
+}
+
+
+/* =====================================================
+   PAGE 3 — DIARY
+   ===================================================== */
+#page-diary {
+  background: linear-gradient(135deg, #ffe4f0, #ffd6e7 40%, #ffc8e0 100%);
+}
+
+/* ---- Falling petals ---- */
+.petals-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.petal {
+  position: absolute;
+  top: -30px;
+  font-size: 1.2rem;
+  animation: petalFall linear infinite;
+  opacity: 0.7;
+}
+
+@keyframes petalFall {
+  0%   { transform: translateY(-20px) rotate(0deg) translateX(0px); opacity: 0.8; }
+  50%  { transform: translateY(50vh) rotate(180deg) translateX(30px); }
+  100% { transform: translateY(110vh) rotate(360deg) translateX(-20px); opacity: 0; }
+}
+
+/* ---- Diary corner bears ---- */
+.diary-bear {
+  position: absolute;
+  font-size: 2.2rem;
+  z-index: 5;
+  opacity: 0.7;
+  animation: diaryBearBounce 3s ease-in-out infinite;
+}
+.diary-bear-tl { top: 12px; left: 12px; animation-delay: 0s; }
+.diary-bear-tr { top: 12px; right: 12px; animation-delay: 0.6s; }
+.diary-bear-bl { bottom: 80px; left: 12px; animation-delay: 1.2s; }
+.diary-bear-br { bottom: 80px; right: 12px; animation-delay: 1.8s; }
+
+@keyframes diaryBearBounce {
+  0%, 100% { transform: translateY(0) rotate(-8deg); }
+  50%       { transform: translateY(-12px) rotate(8deg); }
+}
+
+/* ---- Diary wrapper ---- */
+.diary-wrapper {
+  position: relative;
+  z-index: 10;
+  width: min(820px, 96vw);
+  max-height: 75vh;
+}
+
+.diary-peeking-bears {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  pointer-events: none;
+}
+
+.peek-bear-left, .peek-bear-right {
+  font-size: 2rem;
+  opacity: 0.8;
+  animation: peekBear 2.5s ease-in-out infinite;
+}
+.peek-bear-right { animation-delay: 0.8s; }
+
+@keyframes peekBear {
+  0%, 100% { transform: translateY(10px); }
+  50%       { transform: translateY(0px); }
+}
+
+/* ---- Diary book ---- */
+.diary-book {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 20px 80px rgba(180,60,120,0.3),
+              0 4px 20px rgba(244,114,182,0.2);
+}
+
+/* ---- Cover ---- */
+.diary-cover {
+  background: linear-gradient(135deg, #e75480 0%, #c0437d 40%, #a0336d 100%);
+  border-radius: var(--radius-md);
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+  cursor: pointer;
+  transition: transform 0.6s ease;
+  transform-origin: left center;
+  position: relative;
+  z-index: 5;
+}
+
+.diary-cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3C/g%3E%3C/svg%3E");
+  border-radius: inherit;
+}
+
+.diary-cover-content {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.diary-lock {
+  font-size: 3rem;
+  margin-bottom: 12px;
+  display: block;
+  animation: lockSpin 4s ease-in-out infinite;
+}
+
+@keyframes lockSpin {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.15) rotate(10deg); }
+}
+
+.diary-cover-title {
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(1.5rem, 5vw, 2.2rem);
+  color: #fff;
+  text-shadow: 0 3px 12px rgba(0,0,0,0.3);
+  margin-bottom: 8px;
+}
+
+.diary-cover-sub {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(1rem, 3vw, 1.4rem);
+  color: rgba(255,255,255,0.85);
+}
+
+.diary-ribbon {
+  font-size: 2rem;
+  margin-top: 12px;
+  display: block;
+  animation: ribbonWiggle 2s ease-in-out infinite;
+}
+
+@keyframes ribbonWiggle {
+  0%, 100% { transform: rotate(-10deg); }
+  50%       { transform: rotate(10deg); }
+}
+
+/* ---- Diary pages ---- */
+.diary-pages {
+  display: none;
+  grid-template-columns: 1fr 1fr;
+  min-height: 440px;
+  background: #fffaf8;
+  border-radius: var(--radius-md);
+}
+
+.diary-pages.open {
+  display: grid;
+  animation: pagesReveal 0.6s ease;
+}
+
+@keyframes pagesReveal {
+  0%   { opacity: 0; transform: scaleX(0.3); }
+  100% { opacity: 1; transform: scaleX(1); }
+}
+
+.diary-left-page {
+  background: linear-gradient(160deg, #fff5f8, #ffeaf2);
+  border-right: 3px solid rgba(244,114,182,0.25);
+  border-radius: var(--radius-md) 0 0 var(--radius-md);
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  gap: 10px;
+  overflow: hidden;
+}
+
+.diary-left-page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    transparent, transparent 29px,
+    rgba(244,114,182,0.12) 30px
+  );
+  pointer-events: none;
+}
+
+.page-decoration {
+  font-size: 1.5rem;
+  letter-spacing: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.diary-stickers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.sticker {
+  font-size: 2.2rem;
+  display: inline-block;
+  filter: drop-shadow(0 2px 8px rgba(244,114,182,0.4));
+}
+.sticker-1 { animation: stickerFloat 3s ease-in-out infinite; }
+.sticker-2 { animation: stickerFloat 2.5s ease-in-out infinite 0.5s; }
+.sticker-3 { animation: stickerFloat 3.5s ease-in-out infinite 1s; }
+.sticker-4 { animation: stickerFloat 2.8s ease-in-out infinite 0.3s; }
+.sticker-5 { animation: stickerFloat 3.2s ease-in-out infinite 0.7s; }
+
+@keyframes stickerFloat {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50%       { transform: translateY(-10px) rotate(5deg); }
+}
+
+/* Big bear display on left page */
+.left-page-bear {
+  font-size: 4rem;
+  animation: bounceSlow 2.5s ease-in-out infinite;
+  position: relative;
+  z-index: 1;
+}
+
+.diary-right-page {
+  background: linear-gradient(160deg, #fffaf8, #fff5f0);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 32px 28px;
+  overflow-y: auto;
+  max-height: 440px;
+}
+
+.diary-right-page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    transparent, transparent 29px,
+    rgba(244,114,182,0.08) 30px
+  );
+  pointer-events: none;
+}
+
+.page-lines {
+  position: relative;
+  z-index: 1;
+}
+
+.diary-heading {
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(1.3rem, 4vw, 1.8rem);
+  color: var(--text-dark);
+  margin-bottom: 18px;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(244,114,182,0.3);
+}
+
+.typewriter-text {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+  color: var(--text-mid);
+  line-height: 1.9;
+  white-space: pre-wrap;
+  min-height: 200px;
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background: var(--pink-deep);
+  margin-left: 2px;
+  vertical-align: middle;
+  animation: blink 0.75s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.diary-signature {
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  color: var(--pink-deep);
+  text-align: right;
+  margin-top: 24px;
+  opacity: 0;
+  transition: opacity 1s ease;
+  text-shadow: 0 2px 10px rgba(244,114,182,0.3);
+}
+
+.diary-signature.show { opacity: 1; }
+
+/* ---- Diary bottom ---- */
+.diary-bottom {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+/* =====================================================
+   MUSIC TOGGLE
+   ===================================================== */
+.music-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 9000;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(244,114,182,0.4);
+  border-radius: 50%;
+  width: 52px;
+  height: 52px;
+  font-size: 1.4rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(244,114,182,0.3);
+  transition: all 0.3s ease;
+}
+
+.music-toggle:hover {
+  transform: scale(1.1) rotate(10deg);
+  box-shadow: 0 8px 30px rgba(244,114,182,0.5);
+}
+
+.music-toggle.playing {
+  animation: musicPulse 1.5s ease-in-out infinite;
+  background: rgba(244,114,182,0.25);
+}
+
+@keyframes musicPulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(244,114,182,0.4); }
+  50%       { box-shadow: 0 4px 40px rgba(244,114,182,0.7); }
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+@media (max-width: 640px) {
+  .passcode-card { padding: 32px 24px; }
+  .digit-box { width: 48px; height: 58px; font-size: 1.5rem; }
+  .heart-btn { font-size: 0.9rem; padding: 14px 24px; }
+  .rotating-text-container { width: 88vw; height: 88vw; }
+  .circle-text { font-size: 14px; }
+
+  .diary-pages { grid-template-columns: 1fr; }
+  .diary-left-page { min-height: 120px; border-right: none; border-bottom: 3px solid rgba(244,114,182,0.25); border-radius: var(--radius-md) var(--radius-md) 0 0; }
+  .diary-right-page { border-radius: 0 0 var(--radius-md) var(--radius-md); max-height: 300px; }
+  .diary-cover { min-height: 200px; padding: 24px; }
+
+  .corner-bear { font-size: 1.8rem; }
+  .diary-bear { font-size: 1.6rem; }
+}
+
+/* =====================================================
+   SCROLLBAR STYLING
+   ===================================================== */
+.diary-right-page::-webkit-scrollbar {
+  width: 4px;
+}
+.diary-right-page::-webkit-scrollbar-track {
+  background: rgba(244,114,182,0.1);
+  border-radius: 10px;
+}
+.diary-right-page::-webkit-scrollbar-thumb {
+  background: rgba(244,114,182,0.4);
+  border-radius: 10px;
+}
+
+/* =====================================================
+   HEART CLICK EFFECTS
+   ===================================================== */
+.click-heart {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  font-size: 1.5rem;
+  animation: clickHeartAnim 1s ease forwards;
+}
+
+@keyframes clickHeartAnim {
+  0%   { transform: translate(-50%, -50%) scale(0) rotate(-30deg); opacity: 1; }
+  60%  { transform: translate(-50%, -120%) scale(1.3) rotate(10deg); opacity: 1; }
+  100% { transform: translate(-50%, -180%) scale(0.8) rotate(-5deg); opacity: 0; }
+}
+
+/* =====================================================
+   SHARED NAV BOTTOM
+   ===================================================== */
+.page-nav-bottom {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+/* =====================================================
+   PAGE 4 — LOVE REASONS
+   ===================================================== */
+#page-reasons {
+  background: linear-gradient(135deg, #fce7f3 0%, #f9a8d4 40%, #fbcfe8 100%);
+  background-size: 300% 300%;
+  animation: bgShift 10s ease infinite;
+}
+
+.reasons-wrapper {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: min(520px, 94vw);
+  padding-bottom: 64px;
+}
+
+.reasons-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.reasons-bear {
+  font-size: 2rem;
+  animation: bounceSlow 2s ease-in-out infinite;
+}
+
+.reasons-title {
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(1.5rem, 5vw, 2.2rem);
+  color: var(--text-dark);
+  text-shadow: 0 2px 15px rgba(244,114,182,0.4);
+  text-align: center;
+}
+
+/* Card area */
+.reasons-card-area {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+}
+
+.reasons-card {
+  flex: 1;
+  min-height: 220px;
+  background: rgba(255,255,255,0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 2px solid rgba(244,114,182,0.35);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 16px 50px rgba(244,114,182,0.25),
+              inset 0 1px 0 rgba(255,255,255,0.9);
+  perspective: 800px;
+  overflow: hidden;
+}
+
+.reasons-card-inner {
+  text-align: center;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  animation: reasonFadeIn 0.4s ease;
+}
+
+@keyframes reasonFadeIn {
+  0%   { opacity: 0; transform: scale(0.88) translateY(10px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.reason-number {
+  font-family: 'Pacifico', cursive;
+  font-size: 0.9rem;
+  color: var(--pink-deep);
+  background: rgba(244,114,182,0.1);
+  border: 1.5px solid rgba(244,114,182,0.3);
+  border-radius: 50px;
+  padding: 4px 16px;
+}
+
+.reason-icon {
+  font-size: 2.8rem;
+  animation: bounceSlow 2s ease-in-out infinite;
+}
+
+.reason-text {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(1.1rem, 3.5vw, 1.4rem);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/* Arrows */
+.reasons-arrow {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.7);
+  border: 2px solid rgba(244,114,182,0.4);
+  color: var(--pink-deep);
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(244,114,182,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reasons-arrow:hover {
+  background: var(--pink-deep);
+  color: #fff;
+  transform: scale(1.15);
+  box-shadow: 0 6px 24px rgba(244,114,182,0.5);
+}
+
+.reasons-arrow:disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Progress */
+.reasons-progress {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.reasons-dots {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 300px;
+}
+
+.reason-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(244,114,182,0.3);
+  transition: all 0.3s ease;
+}
+
+.reason-dot.active {
+  background: var(--pink-deep);
+  transform: scale(1.4);
+  box-shadow: 0 0 8px rgba(244,114,182,0.5);
+}
+
+.reasons-counter {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-mid);
+}
+
+/* =====================================================
+   PAGE 5 — COUNTDOWN TIMERS
+   ===================================================== */
+#page-timers {
+  background: linear-gradient(135deg, #4a0e2c 0%, #7c1d4e 40%, #b93c78 100%);
+  background-size: 300% 300%;
+  animation: bgShift 12s ease infinite;
+}
+
+.timers-wrapper {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: min(600px, 95vw);
+  padding-bottom: 60px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.timers-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 1.5rem;
+}
+
+.timers-title {
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(1.3rem, 4.5vw, 1.9rem);
+  color: #fff;
+  text-shadow: 0 2px 20px rgba(244,114,182,0.6);
+  text-align: center;
+}
+
+/* Timer card */
+.timer-card {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1.5px solid rgba(255,180,215,0.3);
+  border-radius: var(--radius-lg);
+  padding: 24px 20px;
+  width: 100%;
+  box-shadow: 0 16px 50px rgba(0,0,0,0.3),
+              inset 0 1px 0 rgba(255,255,255,0.15);
+}
+
+.timer-card-1 { border-color: rgba(249,168,212,0.5); }
+.timer-card-2 { border-color: rgba(196,181,253,0.5); }
+
+.timer-card-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.timer-emoji {
+  font-size: 2rem;
+  animation: bounceSlow 2.5s ease-in-out infinite;
+}
+
+.timer-label {
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(1rem, 3.5vw, 1.35rem);
+  color: #fff;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.3);
+}
+
+.timer-date {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.82rem;
+  color: rgba(255,220,240,0.8);
+  font-weight: 500;
+}
+
+/* Numbers display */
+.timer-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.timer-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.timer-num {
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(1.8rem, 5.5vw, 2.8rem);
+  color: #fff;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+  min-width: 72px;
+  text-align: center;
+  text-shadow: 0 2px 12px rgba(244,114,182,0.5);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2),
+              inset 0 1px 0 rgba(255,255,255,0.15);
+  transition: transform 0.15s ease;
+}
+
+.timer-num.tick {
+  transform: scale(1.08);
+}
+
+.timer-unit-label {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: rgba(255,220,240,0.8);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.timer-colon {
+  font-size: 1.4rem;
+  color: rgba(249,168,212,0.8);
+  margin-bottom: 20px;
+  animation: heartPop 1.2s ease-in-out infinite;
+}
+
+.timer-caption {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+  color: rgba(255,220,240,0.85);
+  text-align: center;
+  margin-top: 14px;
+  font-style: italic;
+}
+
+/* Scrollbar timers */
+.timers-wrapper::-webkit-scrollbar { width: 4px; }
+.timers-wrapper::-webkit-scrollbar-track { background: rgba(255,255,255,0.1); border-radius:10px; }
+.timers-wrapper::-webkit-scrollbar-thumb { background: rgba(244,114,182,0.4); border-radius:10px; }
+
+/* =====================================================
+   PAGE 6 — BEAR DRESS-UP
+   ===================================================== */
+#page-dress {
+  background: linear-gradient(135deg, #fff0f8 0%, #ffd6ec 50%, #ffb6d9 100%);
+  background-size: 300% 300%;
+  animation: bgShift 10s ease infinite;
+}
+
+.dress-wrapper {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: min(700px, 96vw);
+  padding-bottom: 60px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.dress-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 1.5rem;
+}
+
+.dress-title {
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
+  color: var(--text-dark);
+  text-shadow: 0 2px 12px rgba(244,114,182,0.3);
+  text-align: center;
+}
+
+/* Two-station layout */
+.dress-stage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+}
+
+.dress-station {
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 2px solid rgba(244,114,182,0.3);
+  border-radius: var(--radius-lg);
+  padding: 18px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 12px 40px rgba(244,114,182,0.2),
+              inset 0 1px 0 rgba(255,255,255,0.9);
+}
+
+.bear-name {
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(1rem, 3vw, 1.25rem);
+  color: var(--text-dark);
+}
+
+/* Bear display */
+.bear-costume-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  position: relative;
+  min-height: 160px;
+  justify-content: center;
+}
+
+.bear-body {
+  font-size: clamp(4rem, 10vw, 6rem);
+  line-height: 1;
+  filter: drop-shadow(0 6px 16px rgba(244,114,182,0.3));
+  transition: transform 0.3s ease;
+}
+
+.bear-body:hover { transform: scale(1.05) rotate(3deg); }
+
+.costume-slot {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  min-height: 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  animation: stickerFloat 2.5s ease-in-out infinite;
+}
+
+.slot-hat  { margin-bottom: -4px; }
+.slot-face { margin-top: -8px; margin-bottom: -8px; font-size: clamp(1.2rem, 3vw, 1.6rem); }
+.slot-neck { margin-top: -4px; }
+.slot-hand { font-size: clamp(1.8rem, 4.5vw, 2.5rem); margin-top: 4px; }
+
+/* Accessory palette */
+.acc-palette {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+  width: 100%;
+}
+
+.acc-btn {
+  background: rgba(255,255,255,0.7);
+  border: 2px solid rgba(244,114,182,0.25);
+  border-radius: var(--radius-sm);
+  font-size: clamp(1.3rem, 3.5vw, 1.7rem);
+  padding: 8px 4px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(244,114,182,0.1);
+}
+
+.acc-btn:hover {
+  transform: scale(1.18) rotate(5deg);
+  box-shadow: 0 6px 20px rgba(244,114,182,0.4);
+  border-color: var(--pink-deep);
+  background: rgba(244,114,182,0.15);
+}
+
+.acc-btn.selected {
+  background: rgba(244,114,182,0.25);
+  border-color: var(--pink-deep);
+  box-shadow: 0 4px 14px rgba(244,114,182,0.4),
+              0 0 0 2px rgba(244,114,182,0.2);
+  transform: scale(1.08);
+}
+
+.acc-reset {
+  border-color: rgba(239,68,68,0.3);
+  background: rgba(254,226,226,0.5);
+}
+
+.acc-reset:hover {
+  border-color: #ef4444;
+  background: rgba(254,202,202,0.8);
+  transform: scale(1.1) rotate(0deg);
+}
+
+/* Scrollbar dress */
+.dress-wrapper::-webkit-scrollbar { width: 4px; }
+.dress-wrapper::-webkit-scrollbar-track { background: rgba(244,114,182,0.1); border-radius:10px; }
+.dress-wrapper::-webkit-scrollbar-thumb { background: rgba(244,114,182,0.4); border-radius:10px; }
+
+/* ---- Responsive ---- */
+@media (max-width: 540px) {
+  .dress-stage { grid-template-columns: 1fr; }
+  .acc-palette { grid-template-columns: repeat(3, 1fr); }
+  .timer-display { gap: 5px; }
+  .timer-num { min-width: 56px; font-size: 1.5rem; padding: 6px 10px; }
+  .reasons-card-area { gap: 8px; }
+  .reasons-arrow { width: 36px; height: 36px; font-size: 1rem; }
+}
+
+
